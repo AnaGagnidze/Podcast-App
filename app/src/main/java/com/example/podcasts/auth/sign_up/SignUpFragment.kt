@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
 
     override fun setUpFragment() {
-        TODO("Not yet implemented")
+
     }
 
 }
