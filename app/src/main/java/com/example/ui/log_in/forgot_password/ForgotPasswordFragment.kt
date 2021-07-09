@@ -1,10 +1,10 @@
 package com.example.podcasts.auth.log_in.forgot_password
 
 import androidx.fragment.app.viewModels
-import com.example.podcasts.BaseFragment
+import com.example.base.BaseFragment
+import com.example.extensions.setSpannedString
 import com.example.podcasts.R
 import com.example.podcasts.databinding.ForgotPasswordFragmentBinding
-import com.example.podcasts.extensions.setSpannedString
 import dagger.hilt.android.AndroidEntryPoint
 
 typealias strings = R.string

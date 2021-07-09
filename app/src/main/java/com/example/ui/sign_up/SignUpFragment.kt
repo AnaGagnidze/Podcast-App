@@ -1,13 +1,10 @@
 package com.example.ui.sign_up
 
-import com.example.podcasts.BaseFragment
 import com.example.podcasts.R
 import com.example.base.BaseFragment
+import com.example.extensions.setSpannedString
 import com.example.podcasts.databinding.FragmentSignUpBinding
-import com.example.podcasts.extensions.setSpannedString
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+
 import dagger.hilt.android.AndroidEntryPoint
 
 typealias strings = R.string
