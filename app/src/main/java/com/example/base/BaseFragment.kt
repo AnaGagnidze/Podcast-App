@@ -1,4 +1,4 @@
-package com.example.podcasts
+package com.example.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,6 +1,6 @@
-package com.example.podcasts.auth.sign_up
+package com.example.ui.sign_up
 
-import com.example.podcasts.BaseFragment
+import com.example.base.BaseFragment
 import com.example.podcasts.databinding.FragmentSignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/logInFragment">
+    app:startDestination="@id/genrePodcastFragment">
 
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.podcasts.auth.log_in.LogInFragment"
+        android:name="com.example.ui.log_in.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -16,7 +16,17 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.podcasts.auth.sign_up.SignUpFragment"
+        android:name="com.example.ui.sign_up.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.ui.home.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/genrePodcastFragment"
+        android:name="com.example.ui.podcast_genre.GenrePodcastFragment"
+        android:label="genre_podcast_fragment"
+        tools:layout="@layout/genre_podcast_fragment" />
 </navigation>

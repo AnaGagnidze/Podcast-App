@@ -1,4 +1,4 @@
-package com.example.podcasts.extensions
+package com.example.extensions
 
 import android.text.Spannable
 import android.text.SpannableString

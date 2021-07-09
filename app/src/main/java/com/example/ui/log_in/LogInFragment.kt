@@ -1,9 +1,9 @@
-package com.example.podcasts.auth.log_in
+package com.example.ui.log_in
 
-import com.example.podcasts.BaseFragment
+import com.example.base.BaseFragment
 import com.example.podcasts.R
 import com.example.podcasts.databinding.FragmentLogInBinding
-import com.example.podcasts.extensions.setSpannedString
+import com.example.extensions.setSpannedString
 import dagger.hilt.android.AndroidEntryPoint
 
 

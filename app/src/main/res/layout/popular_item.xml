@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/transparent">
+
+    <ImageView
+        android:layout_marginStart="20dp"
+        android:id="@+id/podcastImg"
+        android:layout_width="124dp"
+        android:layout_height="124dp"
+        android:src="@drawable/ic_launcher_background"/>
+
+    <TextView
+        android:layout_marginStart="20dp"
+        android:id="@+id/nameTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="temo"
+        android:textColor="@color/white"
+        android:textSize="26dp"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:id="@+id/authorTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="temo"
+        android:textColor="@color/recyclerTxtColor"
+        android:textSize="16sp"/>
+
+
+</LinearLayout>
