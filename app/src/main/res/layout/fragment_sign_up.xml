@@ -1,14 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ui.sign_up.SignUpFragment">
+    android:background="@drawable/background_design"
+    android:fillViewport="true"
+    android:layerType="software"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    tools:context=".auth.sign_up.SignUpFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/signUptxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/startListeningTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/sign_up_and_start_listening_to_podcasts"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signUptxtV" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/userNameEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/input_backg_design"
+            android:drawableStart="@drawable/ic_outline_person_24"
+            android:drawablePadding="14.1dp"
+            android:hint="@string/user_name"
+            android:inputType="text"
+            android:lines="1"
+            android:paddingStart="21dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/start_icon_clr"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/startListeningTxtV" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtTxtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/input_backg_design"
+            android:drawableStart="@drawable/ic_outline_email_24"
+            android:drawablePadding="14.1dp"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:paddingStart="21dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/start_icon_clr"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/userNameEmail" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtTxtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/input_backg_design"
+            android:drawableStart="@drawable/ic_outline_lock_24"
+            android:drawablePadding="14.1dp"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:paddingStart="21dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/start_icon_clr"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/edtTxtEmail" />
+
+        <include
+            android:id="@+id/signUpBtn"
+            layout="@layout/auth_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtTxtPassword" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:text="@string/or"
+            android:textColor="@color/or_clr"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signUpBtn" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/googleAuthBtn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/google_auth_design"
+            android:drawableStart="@drawable/ic_icon_google"
+            android:drawablePadding="11.7dp"
+            android:paddingStart="100dp"
+            android:paddingEnd="8dp"
+            android:text="@string/continue_with_google"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/orTxt" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fbAuthBtn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/fb_auth_design"
+            android:drawableStart="@drawable/ic_facebook_logo"
+            android:drawablePadding="11.7dp"
+            android:paddingStart="100dp"
+            android:paddingEnd="8dp"
+            android:text="@string/continue_with_facebook"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/googleAuthBtn" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/logInHere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fbAuthBtn" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/termsOfServiceTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:textAlignment="center"
+            android:textSize="8sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logInHere" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

@@ -3,6 +3,7 @@
     package="com.example.podcasts">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name="com.example.app.App"
         android:allowBackup="true"
