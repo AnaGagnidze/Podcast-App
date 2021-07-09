@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "40208286820",
+    "project_id": "podcastapp-99acf",
+    "storage_bucket": "podcastapp-99acf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40208286820:android:5475abeed905e63b684b71",
+        "android_client_info": {
+          "package_name": "com.example.podcasts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40208286820-pok240rekokp5pch72jhpjru23a96qms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEYTP5sABVw6B_tc0WX8BrD_RgQcVFyic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40208286820-pok240rekokp5pch72jhpjru23a96qms.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,4 @@
+
 <resources>
     <string name="app_name">Podcasts</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -12,6 +13,13 @@
     <string name="continue_with_google">Continue with Google</string>
     <string name="continue_with_facebook">Continue with Facebook</string>
     <string name="no_account">Don\'t have an account?\u0020</string>
-    <string name="sign_up">Sign up</string>
+    <string name="sign_up">Sign Up</string>
     <string name="log_in">Log In</string>
+    <string name="sign_up_and_start_listening_to_podcasts">Sign up and start listening to podcasts</string>
+    <string name="user_name">User Name</string>
+    <string name="agree_to_tos">By signing up you indicate that you have read and agreed to the\u0020</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="has_account">Already have an account?\u0020</string>
+    <string name="reset_request">Send Password Reset</string>
+    <string name="password_resent_email">Enter your email below. \n We\'ll look for your account and send you a \n password resent email</string>
 </resources>
