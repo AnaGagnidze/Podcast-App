@@ -1,9 +1,10 @@
-package com.example.podcasts.auth.log_in.forgot_password
+package com.example.ui.log_in.forgot_password
 
 import androidx.fragment.app.viewModels
 import com.example.base.BaseFragment
 import com.example.extensions.setSpannedString
 import com.example.podcasts.R
+import com.example.podcasts.auth.log_in.forgot_password.ForgotPasswordViewModel
 import com.example.podcasts.databinding.ForgotPasswordFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 

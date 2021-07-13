@@ -3,6 +3,7 @@ package com.example.network
 import com.example.model.PagingData
 import com.example.model.genre.PodcastGenre
 import com.example.model.random_podcast.RandomPod
+import com.example.model.specificPodcast.SpecificPodcast
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -23,6 +24,9 @@ interface PodcastNetwork {
 
     @GET("genres?top_level_only=1")
     suspend fun getGenre():Response<PodcastGenre>
+
+    @GET("podcasts/{id}?")
+    suspend fun specificPodcast(@Path("id")id: String):Response<SpecificPodcast>
 
 
 }
