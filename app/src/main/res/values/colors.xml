@@ -14,4 +14,6 @@
     <color name="or_clr">#7b7b8b</color>
     <color name="main_pink">#fb6580</color>
     <color name="recyclerTxtColor">#5C5E6F</color>
+    <color name="bottom_nav_back">#181a26</color>
+
 </resources>
