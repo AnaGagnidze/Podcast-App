@@ -27,9 +27,13 @@ abstract class BaseFragment<VB : ViewBinding>(
             setUpFragment()
         }
         return binding.root
+
+
     }
 
     abstract fun setUpFragment()
+
+
 
     override fun onDestroyView() {
         _binding = null

@@ -1,12 +1,17 @@
 package com.example.ui.podcast_genre
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.model.genre.Genre
 import com.example.podcasts.databinding.GenreItemBinding
 
+typealias GenreClick =(genre:Genre) -> Unit
+
 class GenreAdapter:RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
+
+     lateinit var genreClick: GenreClick
 
     var data: List<Genre?> = emptyList()
         set(value) {
@@ -24,12 +29,21 @@ class GenreAdapter:RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
 
     override fun getItemCount()= data.size
 
-    inner class ViewHolder(private val binding: GenreItemBinding):RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: GenreItemBinding):RecyclerView.ViewHolder(binding.root),View.OnClickListener{
         private  var currentItem: Genre? = null
 
         fun bind(){
+
             currentItem = data[adapterPosition]
+
             binding.textView.text = currentItem?.name
+            binding.arrowImg.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+
+                currentItem?.let { genreClick(it) }
+
         }
 
     }

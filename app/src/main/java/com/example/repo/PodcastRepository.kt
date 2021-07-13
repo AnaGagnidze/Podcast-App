@@ -5,6 +5,7 @@ import android.util.Log.i
 import com.example.model.PagingData
 import com.example.model.genre.PodcastGenre
 import com.example.model.random_podcast.RandomPod
+import com.example.model.specificPodcast.SpecificPodcast
 import com.example.network.PodcastNetwork
 import com.example.util.usecases.Resource
 import com.example.util.usecases.ResponseHandler
@@ -37,6 +38,48 @@ class PodcastRepository @Inject constructor(
             return responseHandler.handleException(e)
         }
     }
+
+    suspend fun getSpecificGenrePodcasts(genre: Int):Resource<PagingData>{
+            val specificPodcast: Response<PagingData>
+        try {
+            specificPodcast = podcastNetwork.getPopularPodcasts(
+                genre,
+                2,
+                "us",
+                0)
+            if (specificPodcast.isSuccessful){
+                specificPodcast.body()?.let {
+                    return responseHandler.handleSuccess(it)
+                }
+                return responseHandler.handleDefaultException()
+            }else{
+                return responseHandler.handleDefaultException()
+            }
+        }catch (e : Exception){
+            return responseHandler.handleException(e)
+        }
+
+    }
+
+    suspend fun getSpecificPodcasts(id: String):Resource<SpecificPodcast>{
+        val specificPodcast: Response<SpecificPodcast>
+        try {
+            specificPodcast = podcastNetwork.specificPodcast(id)
+            if (specificPodcast.isSuccessful){
+                specificPodcast.body()?.let {
+                    return responseHandler.handleSuccess(it)
+                }
+                return responseHandler.handleDefaultException()
+            }else{
+                return responseHandler.handleDefaultException()
+            }
+        }catch (e : Exception){
+            return responseHandler.handleException(e)
+        }
+
+    }
+
+
 
 
     suspend fun getPopularPodcasts(page: Int): Resource<PagingData> {
