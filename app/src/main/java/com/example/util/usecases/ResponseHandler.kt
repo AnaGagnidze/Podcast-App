@@ -1,12 +1,7 @@
 package com.example.util.usecases
 
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import retrofit2.HttpException
-import java.lang.Exception
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
 class ResponseHandler @Inject constructor() {

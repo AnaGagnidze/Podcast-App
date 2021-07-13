@@ -3,28 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/genrePodcastFragment">
+    app:startDestination="@id/logInFragment">
+
     <fragment
-        android:id="@+id/genrePodcastFragment"
-        android:name="com.example.ui.podcast_genre.GenrePodcastFragment"
-        android:label="genre_podcast_fragment"
-        tools:layout="@layout/genre_podcast_fragment" >
+        android:id="@+id/logInFragment"
+        android:name="com.example.ui.log_in.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
         <action
-            android:id="@+id/action_genrePodcastFragment_to_specificPodcastFragment"
-            app:destination="@id/specificPodcastFragment" />
+            android:id="@+id/action_logInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_bottomFragment"
+            app:destination="@id/bottomFragment" />
     </fragment>
     <fragment
-        android:id="@+id/specificPodcastFragment"
-        android:name="com.example.ui.specific_genre_podcast.SpecificPodcastFragment"
-        android:label="specific_podcast_fragment"
-        tools:layout="@layout/specific_podcast_fragment" >
+        android:id="@+id/signUpFragment"
+        android:name="com.example.ui.sign_up.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_specificPodcastFragment_to_episodeFragment"
-            app:destination="@id/episodeFragment" />
+            android:id="@+id/action_signUpFragment_to_bottomFragment"
+            app:destination="@id/bottomFragment" />
     </fragment>
     <fragment
-        android:id="@+id/episodeFragment"
-        android:name="com.example.ui.episodes.EpisodeFragment"
-        android:label="episode_fragment"
-        tools:layout="@layout/episode_fragment" />
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.podcasts.auth.log_in.forgot_password.ForgotPasswordFragment"
+        android:label="forgot_password_fragment"
+        tools:layout="@layout/forgot_password_fragment" />
+    <fragment
+        android:id="@+id/bottomFragment"
+        android:name="com.example.ui.bottom_fragment.BottomFragment"
+        android:label="bottom_fragment"
+        tools:layout="@layout/bottom_fragment" />
 </navigation>

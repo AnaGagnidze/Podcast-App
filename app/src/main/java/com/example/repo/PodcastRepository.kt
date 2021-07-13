@@ -1,7 +1,5 @@
 package com.example.repo
 
-import android.util.Log.d
-import android.util.Log.i
 import com.example.model.PagingData
 import com.example.model.genre.PodcastGenre
 import com.example.model.random_podcast.RandomPod
@@ -10,7 +8,6 @@ import com.example.network.PodcastNetwork
 import com.example.util.usecases.Resource
 import com.example.util.usecases.ResponseHandler
 import retrofit2.Response
-import java.lang.Exception
 import javax.inject.Inject
 
 class PodcastRepository @Inject constructor(
@@ -132,7 +129,6 @@ class PodcastRepository @Inject constructor(
             currentGenre = podcastNetwork.getGenre()
             if (currentGenre.isSuccessful){
                 currentGenre.body()?.let {
-                    i("repositor", "${it}")
                     return responseHandler.handleSuccess(it)
                 }
                 return responseHandler.handleDefaultException()

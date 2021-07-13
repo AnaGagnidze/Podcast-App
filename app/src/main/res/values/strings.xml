@@ -22,4 +22,8 @@
     <string name="has_account">Already have an account?\u0020</string>
     <string name="reset_request">Send Password Reset</string>
     <string name="password_resent_email">Enter your email below. \n We\'ll look for your account and send you a \n password resent email</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="home">Home</string>
 </resources>
