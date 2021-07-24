@@ -10,9 +10,9 @@ import kotlinx.parcelize.Parcelize
 @Keep
 data class Genre(
     @Json(name = "id")
-    val id: Int,
+    val id: Int?,
     @Json(name = "name")
-    val name: String,
+    val name: String?,
     @Json(name = "parent_id")
-    val parentId: Int
+    val parentId: Int?
 ):Parcelable

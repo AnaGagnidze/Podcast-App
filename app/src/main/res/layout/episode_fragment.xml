@@ -48,8 +48,7 @@
             android:id="@+id/imgView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_logo" />
+            android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
 

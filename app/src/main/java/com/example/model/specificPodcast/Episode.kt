@@ -1,9 +1,12 @@
 package com.example.model.specificPodcast
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import androidx.annotation.Keep
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Keep
 data class Episode(
     @Json(name = "audio")
@@ -28,10 +31,8 @@ data class Episode(
     val listennotesUrl: String?,
     @Json(name = "maybe_audio_invalid")
     val maybeAudioInvalid: Boolean?,
-    @Json(name = "pub_date_ms")
-    val pubDateMs: Long?,
     @Json(name = "thumbnail")
     val thumbnail: String?,
     @Json(name = "title")
     val title: String?
-)
+):Parcelable

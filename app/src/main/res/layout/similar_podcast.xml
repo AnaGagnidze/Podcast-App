@@ -10,8 +10,7 @@
         android:layout_marginStart="27dp"
         android:id="@+id/podcastImg"
         android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:src="@drawable/ic_launcher_background"/>
+        android:layout_height="65dp" />
 
     <TextView
         android:layout_marginTop="43dp"

@@ -7,19 +7,19 @@ import androidx.annotation.Keep
 @Keep
 data class Podcast(
     @Json(name = "id")
-    val id: String,
+    val id: String?,
     @Json(name = "image")
-    val image: String,
+    val image: String?,
     @Json(name = "listen_score")
-    val listenScore: String,
+    val listenScore: String?,
     @Json(name = "listen_score_global_rank")
-    val listenScoreGlobalRank: String,
+    val listenScoreGlobalRank: String?,
     @Json(name = "listennotes_url")
-    val listennotesUrl: String,
+    val listennotesUrl: String?,
     @Json(name = "publisher")
-    val publisher: String,
+    val publisher: String?,
     @Json(name = "thumbnail")
-    val thumbnail: String,
+    val thumbnail: String?,
     @Json(name = "title")
-    val title: String
+    val title: String?
 )

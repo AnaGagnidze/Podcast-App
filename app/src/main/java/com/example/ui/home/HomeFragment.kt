@@ -2,7 +2,11 @@ package com.example.ui.home
 
 import android.content.Context
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +31,11 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
     override fun setUpFragment() {
         setRec()
+    }
+
+    private fun goToEpisodeFragment(id: String){
+        setFragmentResult("podcastKey", bundleOf("podcastId" to id))
+        findNavController().navigate(R.id.action_homeFragment_to_episodeFragment)
     }
 
 
@@ -72,6 +81,18 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
 
         dataObserv()
+
+        similarAdapter.imgClick ={
+            it?.let { goToEpisodeFragment(it) }
+        }
+
+        randomAdapter.imgClickListener = {
+            it?.let { goToEpisodeFragment(it) }
+        }
+
+        popularAdapter.secondImgClick = {
+            it?.let { goToEpisodeFragment(it) }
+        }
 
 
     }

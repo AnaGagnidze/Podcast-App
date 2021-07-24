@@ -14,8 +14,7 @@
         android:id="@+id/podcastBGimg"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:src="@mipmap/ic_logo"/>
+        android:layout_height="280dp" />
 
 
     <ImageView
@@ -42,8 +41,7 @@
             android:id="@+id/podcastImg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher" />
+            android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -59,6 +57,7 @@
         android:layout_marginTop="15dp"/>
 
     <TextView
+        android:id="@+id/authorName"
         android:textColor="@color/recyclerTxtColor"
         android:text="Caleste Headle"
         android:layout_marginTop="14dp"
@@ -67,5 +66,32 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+
+    <ImageView
+        android:id="@+id/sound_wave_img"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/authorName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_sound_wave"/>
+
+
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        app:layout_constraintTop_toBottomOf="@+id/sound_wave_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/audioView"
+        app:show_timeout="0"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:controller_layout_id="@layout/custom_control"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

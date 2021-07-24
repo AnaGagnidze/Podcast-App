@@ -49,7 +49,7 @@ class SpecificAdapter:RecyclerView.Adapter<SpecificAdapter.ViewHolder>() {
         }
 
         override fun onClick(v: View?) {
-            podcastClick(currentItem.id)
+            currentItem.id?.let { podcastClick(it) }
         }
     }
 

@@ -7,6 +7,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
@@ -17,6 +18,10 @@ class AuthRepository @Inject constructor(
     fun signUp(email: String, password: String): Task<AuthResult>{
         return auth.createUserWithEmailAndPassword(email, password)
     }
+
+
+
+
 
     fun logIn(email: String, password: String): Task<AuthResult> {
         return auth.signInWithEmailAndPassword(email, password)

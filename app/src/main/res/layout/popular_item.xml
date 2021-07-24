@@ -9,8 +9,7 @@
         android:layout_marginStart="20dp"
         android:id="@+id/podcastImg"
         android:layout_width="124dp"
-        android:layout_height="124dp"
-        android:src="@drawable/ic_launcher_background"/>
+        android:layout_height="124dp" />
 
     <TextView
         android:layout_marginStart="20dp"

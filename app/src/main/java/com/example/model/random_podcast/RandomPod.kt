@@ -7,33 +7,33 @@ import androidx.annotation.Keep
 @Keep
 data class RandomPod(
     @Json(name = "audio")
-    val audio: String,
+    val audio: String?,
     @Json(name = "audio_length_sec")
-    val audioLengthSec: Int,
+    val audioLengthSec: Int?,
     @Json(name = "description")
-    val description: String,
+    val description: String?,
     @Json(name = "explicit_content")
-    val explicitContent: Boolean,
+    val explicitContent: Boolean?,
     @Json(name = "guid_from_rss")
-    val guidFromRss: String,
+    val guidFromRss: String?,
     @Json(name = "id")
-    val id: String,
+    val id: String?,
     @Json(name = "image")
-    val image: String,
+    val image: String?,
     @Json(name = "link")
-    val link: String,
+    val link: String?,
     @Json(name = "listennotes_edit_url")
-    val listennotesEditUrl: String,
+    val listennotesEditUrl: String?,
     @Json(name = "listennotes_url")
-    val listennotesUrl: String,
+    val listennotesUrl: String?,
     @Json(name = "maybe_audio_invalid")
-    val maybeAudioInvalid: Boolean,
+    val maybeAudioInvalid: Boolean?,
     @Json(name = "podcast")
-    val podcast: Podcast,
+    val podcast: Podcast?,
     @Json(name = "pub_date_ms")
-    val pubDateMs: Long,
+    val pubDateMs: Long?,
     @Json(name = "thumbnail")
-    val thumbnail: String,
+    val thumbnail: String?,
     @Json(name = "title")
-    val title: String
+    val title: String?
 )
