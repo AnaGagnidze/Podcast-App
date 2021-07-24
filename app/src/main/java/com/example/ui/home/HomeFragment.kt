@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.base.BaseFragment
-import com.example.podcasts.R
 import com.example.podcasts.databinding.HomeFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import me.relex.circleindicator.CircleIndicator2

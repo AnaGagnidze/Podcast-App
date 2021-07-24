@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.load.engine.Resource
 import com.example.model.Podcasts
-import com.example.model.random_podcast.Podcast
 import com.example.model.random_podcast.RandomPod
-import com.example.network.ApiService
 import com.example.repo.PodcastRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -44,6 +43,7 @@ class HomeViewModel @Inject constructor(
                 val randomTwo = podcastRepository.justListen()
                 val randomThree = podcastRepository.justListen()
                 val randomFour = podcastRepository.justListen()
+
 
                 val data = listOf(
                     randomOne.data,

@@ -1,4 +1,3 @@
-
 <resources>
     <string name="app_name">Podcasts</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -26,4 +25,10 @@
     <string name="search">Search</string>
     <string name="podcasts">Podcasts</string>
     <string name="home">Home</string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="search_hint">Search here…</string>
+    <string name="terms_cond_text">Lorem ipsum dolor sit amet retreats talk repairer gladness sweat deceit stripes meet farthest remain, burning twinkle. Glance merchantibility milk talk inaccurate, viewless twinkle masterless five. Pere crystal shoes macintyre carts yeaned. Milk girth wisely news talk promontory dauntless choose voices, england deck befriended tracts. Crystal sollicitudin deck, length offers healthful trumpet. Indicate string tracts, down, girth, triumph rivulets crags deceive provisions trumpet. Pere sollicitudin twirl inaccurate deceive twinkle orbit remain eget glimmer newer. Diamonds befriended takes grazing voices viewless, scared triumph infold exodus newer girth yeaned. Girth farthest offers unrepenting curabitur, crystal glance ears infold, generous meaning trumpet retreats. Spells secret streams, leave seen mollis perches lawful clock archangels tincidunt, solitary its. Thing abreast prey chased kernan once bitter coil warned pius. Ad journeys revenue coil, secret down, base saviour, archangels streams repine, dust imitates spells. Evermore granted reins lungs journeys chant, crave leave. Minnow pharetra crave, prey lifts warned bias seen secret email granted. Italy lavishly moan notifies rested replace revenue pines mollis reins five. Warranties intellectual ends damsels pharetra, journeys thing lungs revenue. Few number vermilion intellectual, sweetheart searched accept, reins thing, flamed, replace, warranties august distress. Spells ad intellectual, sculptor author, lungs granted prey secret facilisi lavishly allures finger alone down. Non leave bitter warned copse dew vermilion, italy august tugs. Bate veil spells triple exile unmake ploughmen, holy masks shouted my conscious. Polar rose pit things mass swim wipe, table howsoever unmake fetched barrier presence. Caged dedicated glad, forests six weltering porttitor messages.</string>
+    <string name="search_result">Search result</string>
+    <string name="favorite_podcasts">Favorite Podcasts</string>
+    <string name="podcast_station">Podcast Station</string>
 </resources>

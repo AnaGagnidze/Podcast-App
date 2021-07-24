@@ -3,8 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
-    id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -88,6 +88,13 @@ dependencies {
     // circle indicator
     implementation 'me.relex:circleindicator:2.1.6'
 
+    // Room
+
+    def room_version = "2.3.0"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
 
     // Firebase

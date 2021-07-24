@@ -1,6 +1,5 @@
 package com.example.ui.episodes
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log.i
 import androidx.fragment.app.Fragment

@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.model.Podcasts
-import com.example.podcasts.databinding.HomeFragmentBinding
 import com.example.podcasts.databinding.PopularItemBinding
-import com.example.podcasts.databinding.RandomItemBinding
 import com.example.podcasts.databinding.SimilarPodcastBinding
 
 typealias ImgClick = (id: String?) -> Unit

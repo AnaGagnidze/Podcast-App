@@ -20,6 +20,4 @@ class ResponseHandler @Inject constructor() {
     fun <T> handleDefaultException(data: T? = null):Resource<T>{
         return Resource.loading(data)
     }
-
-
 }

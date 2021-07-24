@@ -13,43 +13,51 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class LogInViewModel @Inject constructor(private val authRepository: AuthRepository): ViewModel() {
+class LogInViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : ViewModel() {
 
-    private var logInLiveData = MutableLiveData<Boolean>()
-    val _logInLiveData: LiveData<Boolean> = logInLiveData
+    private var logInLiveData = MutableLiveData<String>()
+    val _logInLiveData: LiveData<String> = logInLiveData
 
 
-    fun logIn(email: String, password: String){
+    fun logIn(email: String, password: String) {
         viewModelScope.launch {
-            val data = withContext(Dispatchers.IO){
-                loggingIn(email, password)
+            val data = withContext(Dispatchers.IO) {
+                authRepository.logIn(email, password)
             }
 
             data.addOnCompleteListener {
-                logInLiveData.postValue(it.isSuccessful)
+                if (it.isSuccessful) {
+                    logInLiveData.postValue("Success")
+                } else {
+                    logInLiveData.postValue(it.exception?.message.toString())
+                }
             }
 
         }
     }
 
-    private fun loggingIn(email: String, password: String) = authRepository.logIn(email, password)
 
-
-    fun logInWithGoogle(account: GoogleSignInAccount): MutableLiveData<Boolean> {
+    fun logInWithGoogle(account: GoogleSignInAccount): MutableLiveData<String> {
         viewModelScope.launch {
             val data = withContext(Dispatchers.IO) {
                 loggingInWithGoogle(account)
             }
 
             data.addOnCompleteListener {
-                logInLiveData.postValue(it.isSuccessful)
+                if (it.isSuccessful) {
+                    logInLiveData.postValue("Success")
+                } else {
+                    logInLiveData.postValue(it.exception?.message.toString())
+                }
             }
         }
         return logInLiveData
     }
 
-    private fun loggingInWithGoogle(account: GoogleSignInAccount) = authRepository.signInWithGoogle(account)
-
+    private fun loggingInWithGoogle(account: GoogleSignInAccount) =
+        authRepository.signInWithGoogle(account)
 
 
 }
