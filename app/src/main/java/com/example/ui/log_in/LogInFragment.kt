@@ -60,6 +60,10 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
         binding.signUpHere.setOnClickListener {
             findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
         }
+
+        binding.forgotPassTxtV.setOnClickListener {
+            findNavController().navigate(R.id.action_logInFragment_to_forgotPasswordFragment)
+        }
     }
 
     private fun logIn(){
@@ -88,11 +92,10 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 logInViewModel.logInWithGoogle(account).observe(viewLifecycleOwner, {result ->
-                    if (result == true){
-                        Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                    if (result == "Success"){
                         findNavController().navigate(R.id.action_logInFragment_to_bottomFragment)
                     }else{
-                        Toast.makeText(requireContext(), "Failure", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show()
                     }
 
                 })
@@ -104,11 +107,10 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
 
     private fun observe(){
         logInViewModel._logInLiveData.observe(viewLifecycleOwner, {
-            if (it == true){
-                Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+            if (it == "Success"){
                 findNavController().navigate(R.id.action_logInFragment_to_bottomFragment)
             }else{
-                Toast.makeText(requireContext(), "Failure", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         })
     }

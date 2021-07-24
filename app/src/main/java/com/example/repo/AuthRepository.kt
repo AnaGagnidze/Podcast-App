@@ -27,6 +27,10 @@ class AuthRepository @Inject constructor(
         Firebase.auth.signOut()
     }
 
+    fun forgotPassword(email: String): Task<Void> {
+       return FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+    }
+
     fun signInWithGoogle(acct: GoogleSignInAccount) =
         firebaseSrc.signInWithGoogle(acct)
 

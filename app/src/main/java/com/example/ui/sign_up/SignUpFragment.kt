@@ -15,6 +15,7 @@ import com.example.podcasts.databinding.FragmentSignUpBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -29,6 +30,9 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
 
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun setUpFragment() {
         setTexts()
@@ -68,6 +72,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
         binding.logInHere.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        binding.termsOfServiceTxtV.setOnClickListener {
+            findNavController().navigate(R.id.action_signUpFragment_to_termsAndCondFragment)
+        }
     }
     private fun signUp(){
         val email = binding.edtTxtEmail.text.toString()
@@ -93,11 +101,11 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 signUpViewModel.logInWithGoogle(account).observe(viewLifecycleOwner, {result ->
-                    if (result == true){
-                        Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_signUpFragment_to_bottomFragment)
+                    if (result == "Success"){
+                        getUsernameFromGmail()?.let { name -> signUpViewModel.saveUsername(name) }
+                        findNavController().navigateUp()
                     }else{
-                        Toast.makeText(requireContext(), "Failure", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show()
                     }
 
                 })
@@ -109,12 +117,29 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
 
     private fun observe(){
         signUpViewModel._signUpLiveData.observe(viewLifecycleOwner, {
-            if (it == true){
-                Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_signUpFragment_to_bottomFragment)
+            if (it == "Success"){
+                if (firebaseAuth.currentUser!!.isEmailVerified){
+                    signUpViewModel.saveUsername(getUsername())
+                    findNavController().navigateUp()
+                }else{
+                    Toast.makeText(requireContext(), "Please verify your account", Toast.LENGTH_SHORT).show()
+                }
             }else{
-                Toast.makeText(requireContext(), "Failure", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun getUsername(): String {
+        val username = binding.userNameEmail.text.toString()
+        if (username.isNotBlank() && username.isNotEmpty())
+            return username
+
+        return username
+    }
+
+    private fun getUsernameFromGmail(): String? {
+        val current = FirebaseAuth.getInstance().currentUser
+        return current?.displayName
     }
 }

@@ -3,11 +3,9 @@ package com.example.ui.podcast_genre
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.base.BaseFragment
 import com.example.model.genre.Genre
-import com.example.podcasts.R
 import com.example.podcasts.databinding.GenrePodcastFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +23,6 @@ class GenrePodcastFragment : BaseFragment<GenrePodcastFragmentBinding>(GenrePodc
     private fun openNewFragment(genre:Genre){
 
         setFragmentResult("requestKey", bundleOf("bundleKey" to genre))
-        findNavController().navigate(R.id.action_genrePodcastFragment_to_specificPodcastFragment)
     }
 
 

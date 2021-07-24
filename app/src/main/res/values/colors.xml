@@ -15,5 +15,10 @@
     <color name="main_pink">#fb6580</color>
     <color name="recyclerTxtColor">#5C5E6F</color>
     <color name="bottom_nav_back">#181a26</color>
+    <color name="terms_cond_color">#9fa4b7</color>
+    <color name="search_back">#2d2c3c</color>
+    <color name="search_icon_clr">#7477a0</color>
+
+
 
 </resources>

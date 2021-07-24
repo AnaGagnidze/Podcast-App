@@ -6,8 +6,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<SearchFragmentBinding>(SearchFragmentBinding::inflate) {
+
     override fun setUpFragment() {
 
     }
+
 
 }

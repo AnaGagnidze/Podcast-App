@@ -48,12 +48,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageButton
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="340dp"
         android:layout_marginTop="40dp"
         android:paddingEnd="10dp"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
         android:src="@drawable/ic_heart" />
 
 

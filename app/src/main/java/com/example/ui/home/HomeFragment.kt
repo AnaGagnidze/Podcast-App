@@ -1,13 +1,10 @@
 package com.example.ui.home
 
-import android.content.Context
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.base.BaseFragment
-import com.example.podcasts.R
 import com.example.podcasts.databinding.HomeFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import me.relex.circleindicator.CircleIndicator2

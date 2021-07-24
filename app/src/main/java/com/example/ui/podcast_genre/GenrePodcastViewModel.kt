@@ -1,14 +1,10 @@
 package com.example.ui.podcast_genre
 
-import android.util.Log
-import android.util.Log.d
-import android.util.Log.i
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.model.genre.Genre
-import com.example.model.genre.PodcastGenre
 import com.example.repo.PodcastRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
