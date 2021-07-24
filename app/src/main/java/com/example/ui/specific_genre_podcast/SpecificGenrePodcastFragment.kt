@@ -59,6 +59,7 @@ class SpecificPodcastFragment : BaseFragment<SpecificPodcastFragmentBinding>(Spe
     private fun goSpecificPodcastFragment(id:String){
 
             setFragmentResult("podcastKey", bundleOf("podcastId" to id))
+            findNavController().navigate(R.id.action_specificPodcastFragment_to_episodeFragment)
 
 
     }

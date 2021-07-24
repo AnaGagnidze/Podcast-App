@@ -7,5 +7,8 @@ import androidx.room.PrimaryKey
 data class FavoritePodcast(
     @PrimaryKey
     val podcastId: Int,
-    val email: String
+    val email: String,
+    val img: String,
+    val title: String,
+    val description: String
 )

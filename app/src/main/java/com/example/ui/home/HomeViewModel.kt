@@ -59,7 +59,7 @@ class HomeViewModel @Inject constructor(
     private fun load() = viewModelScope.launch {
         withContext(Dispatchers.IO){
             val data = podcastRepository.getPopularPodcasts()
-            _podcasts.postValue(data.data?.podcasts)
+            _podcasts.postValue(data.data?.podcasts!!)
         }
     }
 
@@ -67,7 +67,7 @@ class HomeViewModel @Inject constructor(
     private fun load(prm: Int) = viewModelScope.launch {
         withContext(Dispatchers.IO){
             val data = podcastRepository.getPopularPodcasts(prm)
-            _similarPod.postValue(data.data?.podcasts)
+            _similarPod.postValue(data.data?.podcasts!!)
         }
     }
 

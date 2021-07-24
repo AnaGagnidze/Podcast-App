@@ -1,12 +1,12 @@
-package com.example.network
+package com.example.di
 
+import com.example.network.KeyInterceptor
+import com.example.network.PodcastNetwork
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.internal.managers.ApplicationComponentManager
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,7 +27,7 @@ object ApiService {
 
     @Singleton
     @Provides
-     fun createPodcastService():PodcastNetwork{
+     fun createPodcastService(): PodcastNetwork {
         val retrofitBuilder = Retrofit.Builder()
         retrofitBuilder.baseUrl("https://listen-api.listennotes.com/api/v2/")
         retrofitBuilder.client(
