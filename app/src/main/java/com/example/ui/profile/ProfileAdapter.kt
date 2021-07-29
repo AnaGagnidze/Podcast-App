@@ -1,49 +1,56 @@
-package com.example.ui.search
+package com.example.ui.profile
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.model.favorites.FavoritePodcast
 import com.example.podcasts.databinding.SpecificPodcastItemBinding
-import com.example.model.search.Result
 
 typealias PodcastClick =(id: String) -> Unit
-class SearchAdapter:RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+class ProfileAdapter: RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
 
-    lateinit var podcastClick: PodcastClick
+     lateinit var podcastClick: PodcastClick
 
-    var data: List<Result> = emptyList()
+    var data: List<FavoritePodcast> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileAdapter.ViewHolder {
         return ViewHolder(SpecificPodcastItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+
     }
 
-    override fun onBindViewHolder(holder: SearchAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProfileAdapter.ViewHolder, position: Int) {
         holder.bind()
     }
 
     override fun getItemCount()=data.size
 
     inner class ViewHolder(private val binding: SpecificPodcastItemBinding):RecyclerView.ViewHolder(binding.root),View.OnClickListener{
-        private lateinit var currentItem: Result
-        fun bind(){
-            binding.root.setOnClickListener(this)
-                currentItem = data[adapterPosition]
-                binding.podcastNameTxt.text = currentItem.titleOriginal
-                binding.podcastTitleTxt.text = currentItem.email
-            Glide.with(itemView.context).load(currentItem.image)
-                .into(binding.podcastImg)
+        private lateinit var current: FavoritePodcast
 
+        fun bind(){
+
+            binding.root.setOnClickListener(this)
+            current = data[adapterPosition]
+
+            binding.podcastTitleTxt.text = current.description
+            binding.podcastNameTxt.text = current.title
+
+            Glide.with(itemView.context).load(current.img)
+                .into(binding.podcastImg)
 
         }
 
         override fun onClick(v: View?) {
-            podcastClick(currentItem.id)
+            podcastClick(current.podcastId)
         }
+
+
     }
+
 }

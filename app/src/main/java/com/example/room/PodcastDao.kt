@@ -11,7 +11,9 @@ interface PodcastDao {
     suspend fun addPodcast(favoritePodcast: FavoritePodcast)
 
     @Query("SELECT * From favorite_podcasts where email = :email")
-    fun getFavPodcasts(email: String): LiveData<List<FavoritePodcast>>
+    fun getFavPodcasts(email: String): List<FavoritePodcast>
+
+
 
     @Delete
     suspend fun deletePodcast(favoritePodcast: FavoritePodcast)

@@ -1,16 +1,14 @@
 package com.example.ui.home
 
-import android.content.Context
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.base.BaseFragment
+import com.example.model.specificPodcast.Episode
 import com.example.podcasts.R
 import com.example.podcasts.databinding.HomeFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,11 +29,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
     override fun setUpFragment() {
         setRec()
-    }
-
-    private fun goToEpisodeFragment(id: String){
-        setFragmentResult("podcastKey", bundleOf("podcastId" to id))
-        findNavController().navigate(R.id.action_homeFragment_to_episodeFragment)
     }
 
 
@@ -73,28 +66,33 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
         popularAdapter = HomeAdapter()
         binding.popularRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-            binding.popularRecyclerView.adapter = popularAdapter
+        binding.popularRecyclerView.adapter = popularAdapter
 
         similarAdapter = HomeAdapter()
-            binding.similarPodcastRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-            binding.similarPodcastRecyclerview.adapter = similarAdapter
+        binding.similarPodcastRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.similarPodcastRecyclerview.adapter = similarAdapter
+
+        similarAdapter.imgClick = {
+            openPodcastPlayFragment(it)
+        }
+
+        popularAdapter.imgClick = {
+            openPodcastPlayFragment(it)
+        }
+
+        randomAdapter.imgClick = {
+            openPodcastPlayFragment(it)
+        }
 
 
         dataObserv()
 
-        similarAdapter.imgClick ={
-            it?.let { goToEpisodeFragment(it) }
-        }
 
-        randomAdapter.imgClickListener = {
-            it?.let { goToEpisodeFragment(it) }
-        }
+    }
 
-        popularAdapter.secondImgClick = {
-            it?.let { goToEpisodeFragment(it) }
-        }
-
-
+    private fun openPodcastPlayFragment(id: String){
+        setFragmentResult("podcastKey", bundleOf("podcastId" to id))
+        findNavController().navigate(R.id.action_homeFragment_to_episodeFragment)
     }
 
 

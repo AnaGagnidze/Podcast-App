@@ -1,13 +1,17 @@
 package com.example.ui.search
 
 import android.util.Log.i
+import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.base.BaseFragment
 import com.example.podcasts.databinding.SearchFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.model.search.Result
+import com.example.podcasts.R
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<SearchFragmentBinding>(SearchFragmentBinding::inflate) {
@@ -36,7 +40,8 @@ class SearchFragment : BaseFragment<SearchFragmentBinding>(SearchFragmentBinding
 
         viewModel.podcast.observe(viewLifecycleOwner){
             i("shesvla", "shevita observshi")
-            adapter.data = it
+
+            it?.let { adapter.data = it }
 
         }
 
@@ -51,7 +56,20 @@ class SearchFragment : BaseFragment<SearchFragmentBinding>(SearchFragmentBinding
         binding.searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.searchRecyclerView.adapter = adapter
 
+        adapter.podcastClick = {
+            goDetailFragment(it)
+        }
+
     }
+
+    private fun goDetailFragment(id: String){
+
+        setFragmentResult("podcastKey", bundleOf("podcastId" to id))
+        findNavController().navigate(R.id.action_searchFragment_to_episodeFragment)
+
+    }
+
+
 
 
 }

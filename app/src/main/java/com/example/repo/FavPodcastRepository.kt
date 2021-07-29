@@ -1,12 +1,17 @@
-package com.example.room
+package com.example.repo
 
-import androidx.lifecycle.LiveData
 import com.example.model.favorites.FavoritePodcast
+import com.example.room.PodcastDao
 import javax.inject.Inject
 
 class FavPodcastRepository @Inject constructor(private val podcastDao: PodcastDao) {
 
     /*val getFavPodcasts: LiveData<List<FavoritePodcast>> = podcastDao.getFavPodcasts()*/
+
+   suspend fun getAllPodcasts(email: String):List<FavoritePodcast>{
+         return podcastDao.getFavPodcasts(email)
+    }
+
 
     suspend fun addPodcast(favoritePodcast: FavoritePodcast){
         podcastDao.addPodcast(favoritePodcast)
@@ -15,5 +20,7 @@ class FavPodcastRepository @Inject constructor(private val podcastDao: PodcastDa
     suspend fun deletePodcast(favoritePodcast: FavoritePodcast){
         podcastDao.deletePodcast(favoritePodcast)
     }
+
+
 
 }

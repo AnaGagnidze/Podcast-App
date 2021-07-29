@@ -2,7 +2,7 @@ package com.example.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.room.FavPodcastRepository
+import com.example.repo.FavPodcastRepository
 import com.example.room.PodcastDao
 import com.example.room.PodcastsDatabase
 import dagger.Module

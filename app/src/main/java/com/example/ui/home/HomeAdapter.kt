@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.model.Podcasts
+import com.example.model.genre.Genre
 import com.example.podcasts.databinding.PopularItemBinding
 import com.example.podcasts.databinding.SimilarPodcastBinding
 
-typealias ImgClick = (id: String?) -> Unit
+typealias ImgClick = (genre: String) -> Unit
+
 class HomeAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var imgClick: ImgClick
-    lateinit var secondImgClick: ImgClick
 
     var data: List<Podcasts> = emptyList()
         set(value) {
@@ -63,11 +64,11 @@ class HomeAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
         override fun onClick(v: View?) {
-            secondImgClick(currentData.id)
+            currentData.id?.let { imgClick(it) }
         }
     }
 
-    inner class SimilarViewHolder(private val binding: SimilarPodcastBinding):RecyclerView.ViewHolder(binding.root),View.OnClickListener{
+    inner class SimilarViewHolder(private val binding: SimilarPodcastBinding):RecyclerView.ViewHolder(binding.root), View.OnClickListener{
         private lateinit var currentData: Podcasts
         fun bind(){
             binding.root.setOnClickListener(this)
@@ -75,11 +76,10 @@ class HomeAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.podcastNameTxt.text = currentData.title
             binding.podcastText.text = currentData.publisher
             Glide.with(itemView.context).load(currentData.image).into(binding.podcastImg)
-
         }
 
         override fun onClick(v: View?) {
-            imgClick(currentData.id)
+            currentData.id?.let { imgClick(it) }
         }
     }
 

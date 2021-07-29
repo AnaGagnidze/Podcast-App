@@ -8,10 +8,10 @@ import com.bumptech.glide.Glide
 import com.example.model.random_podcast.RandomPod
 import com.example.podcasts.databinding.RandomItemBinding
 
-typealias ImgClickListener = (id: String?)-> Unit
+typealias RandomImgClick = (genre: String) -> Unit
 class RandomPodcastAdapter:RecyclerView.Adapter<RandomPodcastAdapter.Viewholder>() {
 
-    lateinit var imgClickListener: ImgClickListener
+    lateinit var imgClick: RandomImgClick
 
     var data: List<RandomPod?> = emptyList()
         set(value) {
@@ -43,7 +43,9 @@ class RandomPodcastAdapter:RecyclerView.Adapter<RandomPodcastAdapter.Viewholder>
         }
 
         override fun onClick(v: View?) {
-            imgClickListener(currentData.podcast?.id)
+            currentData.podcast?.id?.let {
+                imgClick(it)
+            }
         }
     }
 

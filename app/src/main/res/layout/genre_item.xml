@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView"
-        android:src="@drawable/ic_next"/>
+        android:src="@drawable/ic_podcast_arrow"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

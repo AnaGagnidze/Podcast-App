@@ -6,9 +6,15 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Favorite_podcasts")
 data class FavoritePodcast(
     @PrimaryKey
-    val podcastId: Int,
-    val email: String,
-    val img: String,
-    val title: String,
-    val description: String
+    val podcastId: String,
+    val email: String?,
+    val img: String?,
+    val title: String?,
+    val description: String?
 )
+
+
+
+
+
+

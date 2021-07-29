@@ -26,7 +26,7 @@ class SpecificPodcastViewModel @Inject constructor(
     fun load(id: Int) = viewModelScope.launch {
         withContext(Dispatchers.IO){
             val data = podcastRepository.getSpecificGenrePodcasts(id)
-            _podcasts.postValue(data.data?.podcasts)
+            _podcasts.postValue(data.data?.podcasts!!)
         }
     }
 

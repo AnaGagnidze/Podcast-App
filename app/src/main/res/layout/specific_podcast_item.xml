@@ -21,9 +21,8 @@
 
         <ImageView
             android:id="@+id/podcastImg"
-            android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
     </androidx.cardview.widget.CardView>
 
     <TextView

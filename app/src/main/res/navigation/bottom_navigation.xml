@@ -27,12 +27,20 @@
         android:id="@+id/searchFragment"
         android:name="com.example.ui.search.SearchFragment"
         android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_episodeFragment"
+            app:destination="@id/episodeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.ui.profile.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_episodeFragment"
+            app:destination="@id/episodeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/specificPodcastFragment"
         android:name="com.example.ui.specific_genre_podcast.SpecificPodcastFragment"

@@ -37,7 +37,7 @@ class GenreAdapter:RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
             currentItem = data[adapterPosition]
 
             binding.textView.text = currentItem?.name
-            binding.arrowImg.setOnClickListener(this)
+            binding.root.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {

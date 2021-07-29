@@ -26,10 +26,11 @@
     <TextView
         android:textSize="18sp"
         android:text="saxeli"
-        android:maxLines="2"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/white"
         android:layout_marginStart="97dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/podcastNameTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -38,7 +39,8 @@
         android:textColor="@color/recyclerTxtColor"
         android:text="sadsadsadasda"
         android:maxLines="2"
-        android:layout_marginTop="62sp"
+        android:ellipsize="end"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="97dp"
         android:id="@+id/podcastTitleTxt"
         android:layout_width="wrap_content"

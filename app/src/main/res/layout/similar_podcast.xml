@@ -1,30 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:background="@color/black"
+    android:layout_marginTop="15dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
 
     <ImageView
-        android:layout_marginTop="33dp"
-        android:layout_marginStart="27dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/podcastImg"
         android:layout_width="65dp"
         android:layout_height="65dp" />
 
     <TextView
-        android:layout_marginTop="43dp"
-        android:layout_marginStart="107dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="80dp"
         android:id="@+id/podcastNameTxt"
         android:textSize="18sp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:text="sadasdasdasdasdas"/>
 
     <TextView
-        android:layout_marginTop="71dp"
-        android:layout_marginStart="107dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="10dp"
         android:id="@+id/podcastText"
         android:textColor="@color/recyclerTxtColor"
         android:layout_width="wrap_content"
