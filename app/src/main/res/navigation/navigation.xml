@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/bottomFragment">
+    app:startDestination="@id/logInFragment">
 
     <fragment
         android:id="@+id/logInFragment"
@@ -12,13 +12,19 @@
         tools:layout="@layout/fragment_log_in" >
         <action
             android:id="@+id/action_logInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_logInFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_logInFragment_to_bottomFragment"
             app:destination="@id/bottomFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
             app:popUpTo="@id/logInFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -29,7 +35,9 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_termsAndCondFragment"
-            app:destination="@id/termsAndCondFragment" />
+            app:destination="@id/termsAndCondFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -46,4 +54,11 @@
         android:name="com.example.ui.terms_and_conditions.TermsAndCondFragment"
         android:label="fragment_terms_and_cond"
         tools:layout="@layout/fragment_terms_and_cond" />
+
+
+    <action
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true"
+        android:id="@+id/action_global_logInFragment"
+        app:destination="@id/logInFragment"/>
 </navigation>

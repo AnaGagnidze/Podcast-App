@@ -2,21 +2,24 @@ package com.example.ui.sign_up
 
 import android.app.Activity
 import android.content.Intent
-import android.widget.Toast
+import android.util.Log.i
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.podcasts.R
 import com.example.base.BaseFragment
 import com.example.extensions.checkEmail
+import com.example.extensions.gone
 import com.example.extensions.setSpannedString
+import com.example.extensions.show
+import com.example.podcasts.R
 import com.example.podcasts.databinding.FragmentSignUpBinding
+import com.example.util.usecases.Status
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -37,6 +40,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
     override fun setUpFragment() {
         setTexts()
         setClicks()
+        binding.progressBar.isVisible = false
     }
 
 
@@ -61,8 +65,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
     private fun setClicks(){
         val signInIntent = googleSignInClient.signInIntent
         binding.signUpBtn.authButton.setOnClickListener {
+            binding.signUpBtn.authButton.isClickable = false
             signUp()
-            observe()
+            binding.progressBar.show()
+            i("userN", binding.userNameEmail.text.toString())
         }
 
         binding.googleAuthBtn.setOnClickListener {
@@ -84,11 +90,14 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
             if (email.checkEmail()){
                 signUpViewModel.signUp(email, password)
             }else{
-                Toast.makeText(requireContext(), "Email Format is incorrect", Toast.LENGTH_SHORT).show()
+                binding.edtTxtEmail.error = getString(strings.incorrect_email_format)
             }
         }else{
-            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+            showDialog(getString(strings.fill_all_fields))
         }
+
+        observe()
+
     }
 
     private val resultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -101,45 +110,56 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 signUpViewModel.logInWithGoogle(account).observe(viewLifecycleOwner, {result ->
-                    if (result == "Success"){
-                        getUsernameFromGmail()?.let { name -> signUpViewModel.saveUsername(name) }
-                        findNavController().navigateUp()
-                    }else{
-                        Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show()
+                    when(result.status){
+                        Status.SUCCESS -> {
+                            binding.signUpBtn.authButton.isClickable = true
+                            signUpViewModel.saveUsername(account.email!!, account.displayName?: "No Username")
+                            findNavController().navigateUp()
+                            binding.progressBar.gone()
+                        }
+                        Status.ERROR -> {
+                            binding.signUpBtn.authButton.isClickable = true
+                            binding.progressBar.gone()
+                            result.errorMessage?.let { it1 -> showDialog(it1) }
+                        }
+                        Status.LOADING -> {
+                            binding.progressBar.show()
+                            binding.signUpBtn.authButton.isClickable = false
+                        }
                     }
 
                 })
             } catch (e: ApiException) {
-                Toast.makeText(requireContext(), "${e.message}", Toast.LENGTH_SHORT).show()
+                binding.progressBar.gone()
+                showDialog(e.message.toString())
             }
         }
     }
 
     private fun observe(){
         signUpViewModel._signUpLiveData.observe(viewLifecycleOwner, {
-            if (it == "Success"){
-                if (firebaseAuth.currentUser!!.isEmailVerified){
-                    signUpViewModel.saveUsername(getUsername())
-                    findNavController().navigateUp()
-                }else{
-                    Toast.makeText(requireContext(), "Please verify your account", Toast.LENGTH_SHORT).show()
+            when(it.status){
+                Status.SUCCESS -> {
+                    binding.progressBar.gone()
+                    binding.signUpBtn.authButton.isClickable = true
+                    signUpViewModel.saveUsername(firebaseAuth.currentUser?.email!!, binding.userNameEmail.text.toString())
+                    if (firebaseAuth.currentUser!!.isEmailVerified){
+                        findNavController().navigateUp()
+                    }else{
+                        showDialog(getString(strings.verify_email))
+                    }
                 }
-            }else{
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                Status.ERROR -> {
+                    binding.signUpBtn.authButton.isClickable = true
+                    it.errorMessage?.let { it1 -> showDialog(it1) }
+                    binding.progressBar.gone()
+                }
+                Status.LOADING -> {
+                    binding.progressBar.show()
+                    binding.signUpBtn.authButton.isClickable = false
+                }
             }
         })
     }
 
-    private fun getUsername(): String {
-        val username = binding.userNameEmail.text.toString()
-        if (username.isNotBlank() && username.isNotEmpty())
-            return username
-
-        return username
-    }
-
-    private fun getUsernameFromGmail(): String? {
-        val current = FirebaseAuth.getInstance().currentUser
-        return current?.displayName
-    }
 }

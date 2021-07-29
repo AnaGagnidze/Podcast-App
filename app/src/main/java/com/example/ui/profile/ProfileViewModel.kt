@@ -7,6 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.model.favorites.FavoritePodcast
 import com.example.repo.FavPodcastRepository
 import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.viewModelScope
+import com.example.repo.AuthRepository
+import com.example.user_data.UserInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,6 +44,21 @@ class ProfileViewModel @Inject constructor(
 
 
 
+
+class ProfileViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
+    private val userInfo: UserInfo
+) : ViewModel() {
+
+    fun signOut() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                authRepository.signOut()
+            }
+        }
+    }
+
+    fun getUsername(email: String) = userInfo.getUsername(email)
 
 
 }

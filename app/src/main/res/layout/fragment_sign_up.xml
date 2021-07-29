@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_design"
-    android:fillViewport="true"
-    android:layerType="software"
+    android:background="@color/background"
     android:overScrollMode="never"
     android:scrollbars="none">
 
@@ -94,6 +92,18 @@
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@id/edtTxtEmail" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/edtTxtPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleY="0.5"
+            android:scaleX="0.5"
+            android:indeterminateTint="@color/main_pink"
+            android:indeterminateTintMode="src_atop"/>
+
         <include
             android:id="@+id/signUpBtn"
             layout="@layout/auth_button"
@@ -134,25 +144,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/orTxt" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fbAuthBtn"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="13dp"
-            android:background="@drawable/fb_auth_design"
-            android:drawableStart="@drawable/ic_facebook_logo"
-            android:drawablePadding="11.7dp"
-            android:paddingStart="100dp"
-            android:paddingEnd="8dp"
-            android:text="@string/continue_with_facebook"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/googleAuthBtn" />
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/logInHere"
             android:layout_width="wrap_content"
@@ -161,7 +152,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fbAuthBtn" />
+            app:layout_constraintTop_toBottomOf="@id/googleAuthBtn" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/termsOfServiceTxtV"

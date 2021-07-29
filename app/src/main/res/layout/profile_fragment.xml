@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_design"
+    android:background="@color/wholeScreenBack"
     android:fillViewport="true"
     android:layerType="software"
     tools:context="com.example.ui.profile.ProfileFragment">
@@ -26,14 +26,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <Spinner
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="3dp"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/log_out"
+            android:background="@android:color/transparent"
+            android:textAllCaps="false"
+            android:textAlignment="viewEnd"
+            android:layout_marginTop="11sp"
+            android:textColor="@color/error_red"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/profilePhotoImgV"

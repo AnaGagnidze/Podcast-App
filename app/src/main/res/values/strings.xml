@@ -31,6 +31,13 @@
     <string name="search_result">Search result</string>
     <string name="favorite_podcasts">Favorite Podcasts</string>
     <string name="podcast_station">Podcast Station</string>
+    <string name="log_out">Log out</string>
+    <string name="close">Close</string>
+    <string name="success">success</string>
+    <string name="verify_email">Please verify your account</string>
+    <string name="fill_all_fields">Please fill all fields</string>
+    <string name="incorrect_email_format">Email Format is incorrect</string>
+    <string name="no_internet_connection">There is no internet connection</string>
     <string name="_0_00">0:00</string>
     <string name="pause">Pause</string>
     <string name="play">Play</string>

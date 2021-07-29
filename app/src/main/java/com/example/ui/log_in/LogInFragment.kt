@@ -2,19 +2,23 @@ package com.example.ui.log_in
 
 import android.app.Activity
 import android.content.Intent
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.base.BaseFragment
 import com.example.extensions.checkEmail
+import com.example.extensions.gone
 import com.example.extensions.setSpannedString
+import com.example.extensions.show
 import com.example.podcasts.R
 import com.example.podcasts.databinding.FragmentLogInBinding
+import com.example.util.usecases.Status
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,11 +33,26 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
     private val logInViewModel: LogInViewModel by viewModels()
 
     @Inject
+    lateinit var firebaseAuth: FirebaseAuth
+
+    @Inject
     lateinit var googleSignInClient: GoogleSignInClient
 
     override fun setUpFragment() {
         setTexts()
         setClicks()
+        binding.progressBar.isVisible =false
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkLoggedInUser()
+    }
+
+    private fun checkLoggedInUser(){
+        if (firebaseAuth.currentUser != null){
+            findNavController().navigate(R.id.action_logInFragment_to_bottomFragment)
+        }
     }
 
     private fun setTexts() {
@@ -50,8 +69,10 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
     private fun setClicks(){
         val signInIntent = googleSignInClient.signInIntent
         binding.logInBtn.authButton.setOnClickListener {
+            binding.logInBtn.authButton.isClickable = false
             logIn()
-            observe()
+            binding.progressBar.show()
+
         }
         binding.googleAuthBtn.setOnClickListener {
             resultLauncher.launch(signInIntent)
@@ -74,11 +95,12 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
             if (email.checkEmail()){
                 logInViewModel.logIn(email, password)
             }else{
-                Toast.makeText(requireContext(), "Email format is incorrect", Toast.LENGTH_SHORT).show()
+                binding.edtTxtEmail.error = getString(strings.incorrect_email_format)
             }
         }else{
-            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+            showDialog(getString(strings.fill_all_fields))
         }
+        observe()
     }
 
 
@@ -92,25 +114,52 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 logInViewModel.logInWithGoogle(account).observe(viewLifecycleOwner, {result ->
-                    if (result == "Success"){
-                        findNavController().navigate(R.id.action_logInFragment_to_bottomFragment)
-                    }else{
-                        Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show()
+                    when(result.status){
+                        Status.SUCCESS -> {
+                            binding.logInBtn.authButton.isClickable = true
+                            binding.progressBar.gone()
+                            findNavController().navigate(R.id.action_logInFragment_to_bottomFragment)
+                        }
+                        Status.ERROR -> {
+                            binding.logInBtn.authButton.isClickable = true
+                            binding.progressBar.gone()
+                            result.errorMessage?.let { error -> showDialog(error) }
+                        }
+                        Status.LOADING -> {
+                            binding.progressBar.show()
+                            binding.logInBtn.authButton.isClickable = false
+                        }
                     }
 
                 })
             } catch (e: ApiException) {
-                Toast.makeText(requireContext(), "${e.message}", Toast.LENGTH_SHORT).show()
+                binding.progressBar.gone()
+                showDialog(e.message.toString())
             }
         }
     }
 
     private fun observe(){
         logInViewModel._logInLiveData.observe(viewLifecycleOwner, {
-            if (it == "Success"){
-                findNavController().navigate(R.id.action_logInFragment_to_bottomFragment)
-            }else{
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            binding.progressBar.isVisible = it.loading
+            when(it.status){
+                Status.SUCCESS -> {
+                    binding.progressBar.gone()
+                    binding.logInBtn.authButton.isClickable = true
+                    if(findNavController().currentDestination?.id == R.id.logInFragment){
+                        findNavController().navigate(R.id.action_logInFragment_to_bottomFragment)
+                    }
+
+                }
+                Status.ERROR -> {
+                    binding.progressBar.gone()
+                    binding.logInBtn.authButton.isClickable = true
+                    it.errorMessage?.let { error -> showDialog(error) }
+                }
+                Status.LOADING -> {
+                    binding.progressBar.show()
+                    binding.logInBtn.authButton.isClickable = false
+                }
             }
         })
     }

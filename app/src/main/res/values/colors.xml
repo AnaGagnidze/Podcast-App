@@ -18,6 +18,8 @@
     <color name="terms_cond_color">#9fa4b7</color>
     <color name="search_back">#2d2c3c</color>
     <color name="search_icon_clr">#7477a0</color>
+    <color name="error_red">#DDED4337</color>
+    <color name="wholeScreenBack">#1f1f2c</color>
 
 
 

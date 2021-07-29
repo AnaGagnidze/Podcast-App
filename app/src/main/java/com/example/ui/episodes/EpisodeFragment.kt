@@ -7,11 +7,13 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.base.BaseFragment
 import com.example.model.specificPodcast.Episode
 import com.example.podcasts.R
 import com.example.podcasts.databinding.EpisodeFragmentBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.example.util.usecases.Status
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -46,7 +48,14 @@ class EpisodeFragment : BaseFragment<EpisodeFragmentBinding>(EpisodeFragmentBind
         setUpRecyclerview()
         chooseFavoriteIcon()
         clickOnHeartIcon()
+        binding.refresh.setOnRefreshListener {
+            setUpScreen()
+            setUpRecyclerview()
+        }
 
+        binding.backArrowImg.setOnClickListener{
+            findNavController().navigateUp()
+        }
 
 
     }
@@ -74,6 +83,8 @@ class EpisodeFragment : BaseFragment<EpisodeFragmentBinding>(EpisodeFragmentBind
 
 
 
+
+
     private fun clickOnHeartIcon() {
         binding.favoriteIconImg.setOnClickListener {
 
@@ -93,7 +104,6 @@ class EpisodeFragment : BaseFragment<EpisodeFragmentBinding>(EpisodeFragmentBind
         }
     }
 
-
         private fun setUpRecyclerview() {
 
             adapter = EpisodesAdapter()
@@ -101,7 +111,7 @@ class EpisodeFragment : BaseFragment<EpisodeFragmentBinding>(EpisodeFragmentBind
             binding.currentPodcastRecyclerview.adapter = adapter
             viewModel.specificPodcast.observe(viewLifecycleOwner) {
 
-                adapter.data = it.episodes
+                adapter.data = it.data!!.episodes
                 it.id?.let { it1 -> checkForDatabase(it1) }
 
 
@@ -114,5 +124,20 @@ class EpisodeFragment : BaseFragment<EpisodeFragmentBinding>(EpisodeFragmentBind
         }
 
 
+    private fun setUpScreen(){
+        viewModel.specificPodcast.observe(viewLifecycleOwner){
+            binding.refresh.isRefreshing = it.loading
+            when (it.status){
+                Status.SUCCESS -> {
+                    binding.podcastNameTxt.text = it.data!!.title
+                    binding.desciptionTxt.text = it.data.description
+                    Glide.with(requireContext()).load(it.data.image)
+                        .into(binding.imgView)
+                }
+                Status.ERROR -> {}
+                Status.LOADING -> {}
+            }
+
+        }
     }
 

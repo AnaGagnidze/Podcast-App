@@ -1,6 +1,5 @@
 package com.example.ui.forgot_password
 
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.base.BaseFragment
@@ -54,7 +53,7 @@ class ForgotPasswordFragment :
                 forgotPasswordViewModel.forgotPass(email)
             }
         }else{
-            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+            showDialog(getString(strings.fill_all_fields))
         }
     }
 
@@ -63,7 +62,7 @@ class ForgotPasswordFragment :
             if (it == "Success"){
                 findNavController().navigateUp()
             }else{
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                showDialog(it)
             }
         })
     }
