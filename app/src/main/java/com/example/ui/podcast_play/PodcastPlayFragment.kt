@@ -4,7 +4,6 @@ import android.animation.ValueAnimator
 import android.content.ComponentName
 import android.media.MediaPlayer
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
@@ -13,26 +12,17 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.text.format.DateUtils
 import android.text.method.ScrollingMovementMethod
-import android.util.Log.i
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
-import androidx.activity.viewModels
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.MainActivity
 import com.example.base.BaseFragment
 import com.example.model.specificPodcast.Episode
 import com.example.podcasts.R
 import com.example.podcasts.databinding.PodcastPlayFragmentBinding
 import com.example.service.PodplayMediaService
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.SimpleExoPlayer
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,24 +45,24 @@ class PodcastPlayFragment : BaseFragment<PodcastPlayFragmentBinding>(PodcastPlay
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFragmentResultListener("episodesKey"){ requestKey, bundle ->
-                val episode = bundle.getParcelable<Episode>("episode")
-                episode?.let {
+            val episode = bundle.getParcelable<Episode>("episode")
+            episode?.let {
 
-                    initMediaBrowser()
-                    setupControls(it)
-                    updateControls(it)
-                    if (mediaBrowser.isConnected) {
+                initMediaBrowser()
+                setupControls(it)
+                updateControls(it)
+                if (mediaBrowser.isConnected) {
 
-                        if (MediaControllerCompat.getMediaController(activity as FragmentActivity) == null) {
-                            registerMediaController(mediaBrowser.sessionToken)
-                        }
-                        updateControlsFromController()
-                    } else {
-                        mediaBrowser.connect()
+                    if (MediaControllerCompat.getMediaController(activity as FragmentActivity) == null) {
+                        registerMediaController(mediaBrowser.sessionToken)
                     }
-
-
+                    updateControlsFromController()
+                } else {
+                    mediaBrowser.connect()
                 }
+
+
+            }
 
 
         }

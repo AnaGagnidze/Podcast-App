@@ -84,7 +84,7 @@ class EpisodeViewModel @Inject constructor(
                 data.data.description))
 
             getAllPodcasts(firebaseAuth.currentUser?.email!!)
-            _specificPodcast.postValue(data)
+
         }
     }
 

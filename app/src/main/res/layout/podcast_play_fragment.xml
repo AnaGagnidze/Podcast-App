@@ -8,6 +8,15 @@
 
 
     <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/podcastBGimg"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="280dp" />
+
+    <ImageView
         android:id="@+id/backArrowImg"
         android:layout_marginTop="24dp"
         android:layout_width="wrap_content"
@@ -17,16 +26,6 @@
         app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <ImageView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/podcastBGimg"
-        android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="280dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"

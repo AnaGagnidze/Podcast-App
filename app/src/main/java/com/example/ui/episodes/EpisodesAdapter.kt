@@ -70,11 +70,7 @@ class EpisodesAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(){
             currentItem = data[adapterPosition]
             binding.podcastNameTxt.text = currentItem?.title
-
-
-
             binding.podcastTitleTxt.text = currentItem?.description?.cleanText()
-
             binding.root.setOnClickListener(this)
 
             Glide.with(itemView.context).load(currentItem?.image)

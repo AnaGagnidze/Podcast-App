@@ -1,17 +1,14 @@
 package com.example.ui.profile
 
 import android.util.Log.i
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.base.BaseFragment
 import com.example.extensions.setPhotoUrl
-import com.example.podcasts.R
 import com.example.podcasts.R
 import com.example.podcasts.databinding.ProfileFragmentBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -39,6 +36,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
     private fun setClicks(){
         binding.btnSignOut.setOnClickListener {
             profileViewModel.signOut()
+
             val navController = requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
             navController.navController.navigate(R.id.action_global_logInFragment)
         }
