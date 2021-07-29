@@ -1,25 +1,18 @@
 package com.example.ui.episodes
 
 import android.os.Bundle
-import android.util.Log.i
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.GeneratedAdapter
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.base.BaseFragment
-import com.example.model.genre.Genre
 import com.example.model.specificPodcast.Episode
 import com.example.podcasts.R
 import com.example.podcasts.databinding.EpisodeFragmentBinding
+import com.example.util.usecases.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,6 +45,15 @@ class EpisodeFragment : BaseFragment<EpisodeFragmentBinding>(EpisodeFragmentBind
         setUpScreen()
         setUpRecyclerview()
 
+        binding.refresh.setOnRefreshListener {
+            setUpScreen()
+            setUpRecyclerview()
+        }
+
+        binding.backArrowImg.setOnClickListener{
+            findNavController().navigateUp()
+        }
+
 
     }
 
@@ -61,8 +63,7 @@ class EpisodeFragment : BaseFragment<EpisodeFragmentBinding>(EpisodeFragmentBind
         binding.currentPodcastRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.currentPodcastRecyclerview.adapter = adapter
         viewModel.specificPodcast.observe(viewLifecycleOwner){
-
-            adapter.data = it.episodes
+            adapter.data = it.data!!.episodes
 
         }
 
@@ -74,10 +75,18 @@ class EpisodeFragment : BaseFragment<EpisodeFragmentBinding>(EpisodeFragmentBind
 
     private fun setUpScreen(){
         viewModel.specificPodcast.observe(viewLifecycleOwner){
-            binding.podcastNameTxt.text = it.title
-            binding.desciptionTxt.text = it.description
-            Glide.with(requireContext()).load(it.image)
-                .into(binding.imgView)
+            binding.refresh.isRefreshing = it.loading
+            when (it.status){
+                Status.SUCCESS -> {
+                    binding.podcastNameTxt.text = it.data!!.title
+                    binding.desciptionTxt.text = it.data.description
+                    Glide.with(requireContext()).load(it.data.image)
+                        .into(binding.imgView)
+                }
+                Status.ERROR -> {}
+                Status.LOADING -> {}
+            }
+
         }
     }
 

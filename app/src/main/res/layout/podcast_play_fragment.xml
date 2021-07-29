@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_design"
+    android:background="@color/wholeScreenBack"
     android:layerType="software"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.ui.podcast_play.PodcastPlayFragment">
@@ -19,6 +19,7 @@
 
 
     <ImageView
+        android:id="@+id/backArrowImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

@@ -1,10 +1,7 @@
 package com.example.ui.home
 
-import android.content.Context
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.base.BaseFragment
 import com.example.podcasts.R
 import com.example.podcasts.databinding.HomeFragmentBinding
+import com.example.util.usecases.Status
 import dagger.hilt.android.AndroidEntryPoint
 import me.relex.circleindicator.CircleIndicator2
 
@@ -42,7 +40,13 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
     private fun dataObserv(){
         viewModel.podcasts.observe(viewLifecycleOwner){
             popularAdapter.type = 1
-            popularAdapter.data = it
+            when(it.status){
+                Status.SUCCESS -> {
+                    popularAdapter.data = it.data?.podcasts!!
+                }
+                Status.ERROR -> {}
+                Status.LOADING -> {}
+            }
 
         }
         viewModel.randomPodcasts.observe(viewLifecycleOwner){

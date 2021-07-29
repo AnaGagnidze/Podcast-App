@@ -5,7 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.repo.AuthRepository
+import com.example.util.usecases.Resource
+import com.example.util.usecases.Status
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,8 +20,8 @@ class LogInViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    private var logInLiveData = MutableLiveData<String>()
-    val _logInLiveData: LiveData<String> = logInLiveData
+    private var logInLiveData = MutableLiveData<Resource<String>>()
+    val _logInLiveData: LiveData<Resource<String>> = logInLiveData
 
 
     fun logIn(email: String, password: String) {
@@ -28,10 +31,18 @@ class LogInViewModel @Inject constructor(
             }
 
             data.addOnCompleteListener {
+                logInLiveData.postValue(Resource(Status.LOADING, null, null, true))
                 if (it.isSuccessful) {
-                    logInLiveData.postValue("Success")
+                    logInLiveData.postValue(Resource(Status.SUCCESS, null, "Success", false))
                 } else {
-                    logInLiveData.postValue(it.exception?.message.toString())
+                    logInLiveData.postValue(
+                        Resource(
+                            Status.ERROR,
+                            null,
+                            it.exception?.message.toString(),
+                            false
+                        )
+                    )
                 }
             }
 
@@ -39,17 +50,25 @@ class LogInViewModel @Inject constructor(
     }
 
 
-    fun logInWithGoogle(account: GoogleSignInAccount): MutableLiveData<String> {
+    fun logInWithGoogle(account: GoogleSignInAccount): MutableLiveData<Resource<String>> {
         viewModelScope.launch {
             val data = withContext(Dispatchers.IO) {
                 loggingInWithGoogle(account)
             }
 
             data.addOnCompleteListener {
+                logInLiveData.postValue(Resource(Status.LOADING, null, null, true))
                 if (it.isSuccessful) {
-                    logInLiveData.postValue("Success")
+                    logInLiveData.postValue(Resource(Status.SUCCESS, null, "Success", false))
                 } else {
-                    logInLiveData.postValue(it.exception?.message.toString())
+                    logInLiveData.postValue(
+                        Resource(
+                            Status.ERROR,
+                            null,
+                            it.exception?.message.toString(),
+                            false
+                        )
+                    )
                 }
             }
         }

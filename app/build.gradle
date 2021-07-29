@@ -105,10 +105,10 @@ dependencies {
 
 
     // exo player
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.14.1'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.14.1'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.14.1'
-    implementation 'com.google.android.exoplayer:exoplayer:2.14.1'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.14.2'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.14.2'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.14.2'
+    implementation 'com.google.android.exoplayer:exoplayer:2.14.2'
 
 
 }

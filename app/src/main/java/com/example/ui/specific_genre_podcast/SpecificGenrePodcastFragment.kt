@@ -11,6 +11,7 @@ import com.example.base.BaseFragment
 import com.example.model.genre.Genre
 import com.example.podcasts.R
 import com.example.podcasts.databinding.SpecificPodcastFragmentBinding
+import com.example.util.usecases.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,9 +34,11 @@ class SpecificPodcastFragment : BaseFragment<SpecificPodcastFragmentBinding>(Spe
 
 
     override fun setUpFragment() {
-
         setRecycler()
 
+        binding.refresh.setOnRefreshListener {
+            setRecycler()
+        }
 
     }
 
@@ -51,7 +54,14 @@ class SpecificPodcastFragment : BaseFragment<SpecificPodcastFragmentBinding>(Spe
 
         }
         viewModel.podcasts.observe(viewLifecycleOwner){
-            adapter.data = it
+            binding.refresh.isRefreshing = it.loading
+            when (it.status){
+                Status.SUCCESS -> {
+                    adapter.data = it.data!!.podcasts!!
+                }
+                Status.ERROR -> {}
+                Status.LOADING -> {}
+            }
         }
 
     }
@@ -60,7 +70,6 @@ class SpecificPodcastFragment : BaseFragment<SpecificPodcastFragmentBinding>(Spe
 
             setFragmentResult("podcastKey", bundleOf("podcastId" to id))
             findNavController().navigate(R.id.action_specificPodcastFragment_to_episodeFragment)
-
 
     }
 

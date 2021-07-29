@@ -1,16 +1,11 @@
 package com.example.ui.podcast_play
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.base.BaseFragment
 import com.example.model.specificPodcast.Episode
-import com.example.podcasts.R
 import com.example.podcasts.databinding.PodcastPlayFragmentBinding
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -39,6 +34,9 @@ class PodcastPlayFragment : BaseFragment<PodcastPlayFragmentBinding>(PodcastPlay
     }
 
     override fun setUpFragment() {
+        binding.backArrowImg.setOnClickListener{
+            findNavController().navigateUp()
+        }
 
     }
 

@@ -10,7 +10,7 @@
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         app:labelVisibilityMode="labeled"
-        android:layout_height="85dp"
+        android:layout_height="70dp"
         app:itemIconTint="@drawable/color_change_on_click"
         app:itemTextColor="@drawable/color_change_on_click"
         app:layout_constraintBottom_toBottomOf="parent"

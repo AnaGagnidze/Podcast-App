@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.repo.AuthRepository
 import com.example.user_data.UserInfo
+import com.example.util.usecases.Resource
+import com.example.util.usecases.Status
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +23,8 @@ class SignUpViewModel @Inject constructor(
     private val userInfo: UserInfo
 ) : ViewModel() {
 
-    private var signUpLiveData = MutableLiveData<String>()
-    val _signUpLiveData: LiveData<String> = signUpLiveData
+    private var signUpLiveData = MutableLiveData<Resource<String>>()
+    val _signUpLiveData: LiveData<Resource<String>> = signUpLiveData
 
     fun signUp(email: String, password: String) {
         viewModelScope.launch {
@@ -34,10 +36,18 @@ class SignUpViewModel @Inject constructor(
                 if (it.isSuccessful){
                     val user = firebaseAuth.currentUser
                     user?.sendEmailVerification()?.addOnCompleteListener {task ->
+                        signUpLiveData.postValue(Resource(Status.LOADING, null, null, true))
                         if (it.isSuccessful){
-                            signUpLiveData.postValue("Verification email had been sent")
+                            signUpLiveData.postValue(
+                                Resource(
+                                    Status.SUCCESS,
+                                    null,
+                                    "Verification email has been sent",
+                                    false
+                                )
+                            )
                         }else{
-                            signUpLiveData.postValue(task.exception?.message.toString())
+                            signUpLiveData.postValue(Resource(Status.ERROR, null, task.exception?.message.toString(), false))
                         }
                     }
                 }
@@ -45,17 +55,19 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    fun logInWithGoogle(account: GoogleSignInAccount): MutableLiveData<String> {
+    fun logInWithGoogle(account: GoogleSignInAccount): MutableLiveData<Resource<String>> {
         viewModelScope.launch {
             val data = withContext(Dispatchers.IO) {
                 loggingInWithGoogle(account)
             }
 
             data.addOnCompleteListener {
+                signUpLiveData.postValue(Resource(Status.LOADING, null, null, true))
                 if (it.isSuccessful){
-                    signUpLiveData.postValue("Success")
+
+                    signUpLiveData.postValue(Resource(Status.SUCCESS, null, "Success", false))
                 }else{
-                    signUpLiveData.postValue(it.exception?.message.toString())
+                    signUpLiveData.postValue(Resource(Status.ERROR, null, it.exception?.message.toString(), false))
                 }
             }
         }
@@ -65,8 +77,8 @@ class SignUpViewModel @Inject constructor(
     private fun loggingInWithGoogle(account: GoogleSignInAccount) =
         authRepository.signInWithGoogle(account)
 
-    fun saveUsername(username: String){
-        userInfo.saveUsername(username)
+    fun saveUsername(email: String, username: String){
+        userInfo.saveUsername(email, username)
     }
 
 }
