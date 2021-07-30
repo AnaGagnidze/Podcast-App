@@ -84,17 +84,27 @@ class EpisodeFragment : BaseFragment<EpisodeFragmentBinding>(EpisodeFragmentBind
     private fun clickOnHeartIcon() {
         binding.favoriteIconImg.setOnClickListener {
 
-            if (viewModel.ifExist.value!!) {
-                viewModel.currentPodcast.value?.let { it1 ->
-                    viewModel.delete(it1)
-
-                }
-            } else {
+            if (viewModel.ifExist.value == null){
                 viewModel.currentPodcast.value?.let { it1 ->
                     viewModel.save(it1)
 
                 }
+
+            }else{
+                if (viewModel.ifExist.value!!) {
+                    viewModel.currentPodcast.value?.let { it1 ->
+                        viewModel.delete(it1)
+
+                    }
+                } else {
+                    viewModel.currentPodcast.value?.let { it1 ->
+                        viewModel.save(it1)
+
+                    }
+                }
             }
+
+
             chooseFavoriteIcon()
 
         }

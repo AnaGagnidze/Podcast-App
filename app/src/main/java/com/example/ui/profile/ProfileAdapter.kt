@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.extensions.cleanText
 import com.example.model.favorites.FavoritePodcast
 import com.example.podcasts.databinding.SpecificPodcastItemBinding
 
@@ -38,7 +39,7 @@ class ProfileAdapter: RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
             binding.root.setOnClickListener(this)
             current = data[adapterPosition]
 
-            binding.podcastTitleTxt.text = current.description
+            binding.podcastTitleTxt.text = current.description?.cleanText()
             binding.podcastNameTxt.text = current.title
 
             Glide.with(itemView.context).load(current.img)
