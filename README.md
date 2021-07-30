@@ -21,13 +21,15 @@ We used Listen Notes' [Listen API: Podcast Search & Directory API](https://www.l
 ## Platform and language used.
 Android Studio, Kotlin
 
-## Libraries used
+## Libraries and technologies used
 * Retrofit
 * Moshi
 * Glide
 * Room
 * Firebase
 * Media Player
+* ViewPager2
+* Hilt
 
 ## Requirements
 At this point, you only need Android Studio to run this application and see the existing functionalities.
